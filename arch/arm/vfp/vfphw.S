@@ -282,3 +282,4 @@ ENTRY(vfp_put_double)
 	.endr
 #endif
 ENDPROC(vfp_put_double)
+
