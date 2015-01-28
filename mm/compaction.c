@@ -372,7 +372,7 @@ static isolate_migrate_t isolate_migratepages(struct zone *zone,
 		}
 
 		if (!cc->sync)
-			mode |= ISOLATE_ASYNC_MIGRATE;
+			mode |= ISOLATE_CLEAN;
 
 		/* Try isolate the page */
 		if (__isolate_lru_page(page, mode, 0) != 0)
@@ -656,10 +656,6 @@ unsigned long try_to_compact_pages(struct zonelist *zonelist,
 	if (!order || !may_enter_fs || !may_perform_io)
 		return rc;
 
-#if defined(CONFIG_MACH_Q1_BD) || defined(CONFIG_GC1_00_BD)
-	/* Temporary log to get information whether the compaction works well */
-	printk(KERN_NOTICE "%s, order=%d, sync=%d\n", __func__, order, sync);
-#endif
 	count_vm_event(COMPACTSTALL);
 
 	/* Compact each zone in the list */
@@ -770,3 +766,4 @@ void compaction_unregister_node(struct node *node)
 	return sysdev_remove_file(&node->sysdev, &attr_compact);
 }
 #endif /* CONFIG_SYSFS && CONFIG_NUMA */
+

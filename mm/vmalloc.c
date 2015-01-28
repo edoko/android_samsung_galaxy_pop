@@ -1279,7 +1279,7 @@ static void setup_vmalloc_vm(struct vm_struct *vm, struct vmap_area *va,
 	vm->pid = current->pid;
 	vm->task_name = current->comm;
 #endif
-	va->private = vm;
+	va->vm = vm;
 	va->flags |= VM_VM_AREA;
 }
 
@@ -2634,4 +2634,5 @@ static int __init proc_vmalloc_init(void)
 }
 module_init(proc_vmalloc_init);
 #endif
+
 
